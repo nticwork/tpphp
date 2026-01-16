@@ -2,19 +2,29 @@
 
 header('Content-Type: text/html; charset=utf-8');
 
-$uri  = $_SERVER['REQUEST_URI'] ?? '/';
-$path = parse_url($uri, PHP_URL_PATH) ?: '/';
+$path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 
-// Nettoyage: enlever le préfixe /public si présent
+// Nettoyage /public
 if (str_starts_with($path, '/public/')) {
     $path = substr($path, strlen('/public'));
 }
 
-// Routes simples
-if ($path === '/learn' || $path === '/learn.php') {
-    require __DIR__ . '/../public/learn.php';
+// Page par défaut
+if ($path === '/' || $path === '') {
+    $file = 'index.php';
+} else {
+    // /learn → learn.php
+    $file = ltrim($path, '/') . '.php';
+}
+
+// Sécurité : autoriser seulement les fichiers dans /public
+$fullPath = __DIR__ . '/../public/' . basename($file);
+
+if (is_file($fullPath)) {
+    require $fullPath;
     exit;
 }
 
-// Page par défaut
-require __DIR__ . '/../public/index.php';
+// 404 simple
+http_response_code(404);
+echo '<h1>404 - Page non trouvée</h1>';
