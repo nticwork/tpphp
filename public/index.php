@@ -21,6 +21,7 @@ $phpVersion = PHP_VERSION;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PHP + Triangle d'étoiles</title>
+
   <style>
     :root { color-scheme: light dark; }
     body{
@@ -53,7 +54,6 @@ $phpVersion = PHP_VERSION;
     h1{
       font-size: clamp(18px, 2.2vw, 24px);
       margin: 0;
-      letter-spacing: 0.2px;
     }
     .pill{
       font-size: 14px;
@@ -61,7 +61,6 @@ $phpVersion = PHP_VERSION;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.08);
-      white-space: nowrap;
     }
     .grid{
       display:grid;
@@ -89,28 +88,44 @@ $phpVersion = PHP_VERSION;
       background: rgba(0,0,0,0.32);
       border: 1px solid rgba(255,255,255,0.10);
       overflow:auto;
-      font-size: clamp(14px, 1.7vw, 16px);
+      font-size: 15px;
       line-height: 1.2;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     footer{
-      margin-top: 12px;
-      font-size: 12px;
-      opacity: 0.75;
+      margin-top: 18px;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    a{ color: inherit; }
+    .btn{
+      display:inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,0.18);
+    }
   </style>
 </head>
+
 <body>
   <main class="card">
     <header>
-      <h1>Démo PHP : version + triangle isocèle (10 lignes)</h1>
-      <div class="pill">PHP détecté : <strong><?= htmlspecialchars($phpVersion) ?></strong></div>
+      <h1>Démo PHP : version + triangle isocèle</h1>
+      <div class="pill">PHP : <strong><?= htmlspecialchars($phpVersion) ?></strong></div>
     </header>
 
     <section class="grid">
       <div class="box">
-        <p class="label">Triangle isocèle (généré en PHP)</p>
+        <p class="label">Triangle isocèle (10 lignes)</p>
         <pre><?php foreach ($triangleRows as $row) echo htmlspecialchars($row) . "\n"; ?></pre>
       </div>
 
@@ -133,4 +148,9 @@ function buildIsoscelesTriangle(int $lines): array {
     </section>
 
     <footer>
-      Astuce : change <code>$lines</code> pour génér
+      <span>Astuce : change <code>$lines</code> pour modifier la taille du triangle</span>
+      <a href="learn.php" class="btn">📘 Apprendre les bases de PHP</a>
+    </footer>
+  </main>
+</body>
+</html>
