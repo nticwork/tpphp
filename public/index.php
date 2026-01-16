@@ -150,6 +150,8 @@ function buildIsoscelesTriangle(int $lines): array {
     <footer>
       <span>Astuce : change <code>$lines</code> pour modifier la taille du triangle</span>
       <a href="learn.php" class="btn">📘 Apprendre les bases de PHP</a>
+      <a href="/exercices" class="btn">🧪 Exercices PHP</a>
+
     </footer>
   </main>
 </body>
