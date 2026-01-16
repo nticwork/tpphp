@@ -13,8 +13,12 @@ if (str_starts_with($path, '/public/')) {
 if ($path === '/' || $path === '') {
     $file = 'index.php';
 } else {
-    // /learn → learn.php
-    $file = ltrim($path, '/') . '.php';
+    $file = ltrim($path, '/');
+
+    // Si l'URL finit déjà par .php, ne pas rajouter .php
+    if (!str_ends_with($file, '.php')) {
+        $file .= '.php';
+    }
 }
 
 // Sécurité : autoriser seulement les fichiers dans /public
@@ -25,6 +29,5 @@ if (is_file($fullPath)) {
     exit;
 }
 
-// 404 simple
 http_response_code(404);
 echo '<h1>404 - Page non trouvée</h1>';
